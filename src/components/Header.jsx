@@ -1,10 +1,12 @@
 import { Badge,Container,Nav,Navbar} from 'react-bootstrap';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { searchProduct } from '../redux/slices/productSlice';
 
 const Header = ({insideHome}) => {
   const dispatch = useDispatch()
+const yourWishlist = useSelector(state=>state.wishlistReducer)
+
   return (
     <Navbar expand="lg" className="bg-primary w-100 position-fixed top-0" style={{zIndex:'10'}}>
     <Container>
@@ -19,7 +21,7 @@ const Header = ({insideHome}) => {
             <input onChange={e=>dispatch(searchProduct(e.target.value.toLowerCase()))} style={{width:'500px'}} type="text" className='rounded p-1 form-control border' placeholder='Search Products Here!!!' />
           </Nav.Link>}
           <Nav.Link>
-            <Link className='fw-bolder' style={{color:'white',textDecoration:'none'}} to={'/Wishlist'}><i className="fa-solid fa-heart text-danger"> &nbsp; </i> Wishlist &nbsp;<Badge bg="light">5</Badge></Link>
+            <Link className='fw-bolder' style={{color:'white',textDecoration:'none'}} to={'/Wishlist'}><i className="fa-solid fa-heart text-danger"> &nbsp; </i> Wishlist &nbsp;<Badge bg="light">{yourWishlist?.length}</Badge> </Link>
           </Nav.Link>
 
           
