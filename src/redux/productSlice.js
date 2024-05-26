@@ -1,5 +1,5 @@
-import { createAsyncThunk,createSlice } from "@reduxjs/toolkit";
-import axios from "axios";
+import { createAsyncThunk, createSlice} from '@reduxjs/toolkit'
+import axios from "axios"
 
 export const fetchProducts = createAsyncThunk('products/fetchProducts',async()=>{
     const result = await axios.get("https://dummyjson.com/products")
@@ -16,9 +16,9 @@ const productSlice = createSlice({
         error:""
     },
     reducers:{
-        searchProduct : (state,action)=>{
-        state.allProducts = state.allProductsDummy.filter(item=>item.title.toLowerCase().includes(action.payload))
-    }
+            searchProduct : (state,action)=>{
+                state.allProducts = state.allProductsDummy.filter(item=>item.title.toLowerCase().includes(action.payload))
+            }
     },
     extraReducers:(builder)=>{
         builder.addCase(fetchProducts.fulfilled,(state,action)=>{
@@ -27,24 +27,20 @@ const productSlice = createSlice({
             state.loading = false
             state.error = ""
         })
-
         builder.addCase(fetchProducts.pending,(state,action)=>{
             state.allProducts = []
             state.allProductsDummy = []
             state.loading = true
             state.error = ""
         })
-
-
         builder.addCase(fetchProducts.rejected,(state,action)=>{
             state.allProducts = []
             state.allProductsDummy = []
             state.loading = false
-            state.error = "API Call failed...Please try after some time..."
+            state.error = "API call failed..please after some time !!"
         })
     }
 })
 
 export const {searchProduct} = productSlice.actions
-
 export default productSlice.reducer

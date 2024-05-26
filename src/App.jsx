@@ -1,32 +1,26 @@
+import {Routes,Route,Navigate} from 'react-router-dom'
 import './App.css'
-import {Route,Routes,Navigate} from 'react-router-dom'
-import Home from './pages/Home'
-import Wishlist  from './pages/Wishlist'
-import Cart from './pages/Cart'
-import Footer from './components/Footer'
-import View from './pages/View'
+import Home from "./Pages/Home"
+import Wishlist from "./Pages/Wishlist"
+import Cart from "./Pages/Cart"
+import View from "./Pages/View"
+import Footer from './Components/Footer'
+
 
 function App() {
 
   return (
     <>
-    <Routes> 
-      {/* http://localhost:5173/ */}
-
-<Route path='/'element={<Home/>}/>
-<Route path='/wishlist'element={<Wishlist/>}/>
-<Route path='/cart'element={<Cart/>}/>
-
-{/* http://localhost:5173/10/view */}
-<Route path='/:id/view' element={<View/>}/>
- 
- {/* page not found */}
-
- <Route path='/*' element= {<Navigate to={'/'}/>}/>
-
-
-</Routes>
-<Footer/>
+      <Routes>
+        <Route path="/" element={<Home/>}/>
+        <Route path="/wishlist" element={<Wishlist/>}/>
+        <Route path="/cart" element={<Cart/>}/>
+        {/* : -> path parameter */}
+        <Route path="/:id/view" element={<View/>}/>
+        {/* last only page not found */}
+        <Route path='/*' element={<Navigate to={'/'}/>}/>
+      </Routes>
+      <Footer/>
     </>
   )
 }
